@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wenty-test 数据大屏 (内部测试模拟版)</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="screen-shell">
+      <div class="starfield" aria-hidden="true"></div>
+      <header class="screen-header">
+        <div class="header-side">
+          <span id="sourceMode" class="system-code">WENTY-TEST / 模拟测试数据</span>
+          <div class="header-meta-actions">
+            <strong style="background: rgba(255, 179, 0, 0.16); color: #ffb74d; border: 1px solid rgba(255, 179, 0, 0.4); padding: 2px 8px; border-radius: 4px; font-size: 11px; letter-spacing: 0.5px;">内部模拟数据</strong>
+            <button id="methodButton" class="method-button" type="button" aria-haspopup="dialog" aria-controls="methodOverlay">口径</button>
+            <button id="weeklyReportButton" class="method-button weekly-button" type="button" aria-haspopup="dialog" aria-controls="weeklyReportOverlay">周报</button>
+          </div>
+        </div>
+        <div class="title-block">
+          <i></i>
+          <h1>Wenty-test 数据大屏</h1>
+          <i></i>
+        </div>
+        <div class="time-block">
+          <span id="screenDate">自定义时间段</span>
+          <div class="period-picker" aria-label="自定义时间段">
+            <input id="periodStart" type="date" />
+            <em></em>
+            <input id="periodEnd" type="date" />
+            <button id="periodApply" type="button">应用</button>
+          </div>
+        </div>
+      </header>
+
+      <div id="methodOverlay" class="method-overlay" hidden>
+        <section class="method-panel" role="dialog" aria-modal="true" aria-labelledby="methodTitle">
+          <div class="method-panel-head">
+            <div>
+              <span>指标口径与计算方式</span>
+              <strong id="methodTitle">Wenty-test 数据大屏说明（内部测试与模拟仿真版）</strong>
+            </div>
+            <button id="methodClose" type="button" aria-label="关闭口径说明">×</button>
+          </div>
+          <div class="method-panel-body">
+            <div style="background: rgba(59, 141, 255, 0.12); border: 1px solid rgba(59, 141, 255, 0.35); border-radius: 8px; padding: 12px 16px; margin-bottom: 16px; font-size: 13px; line-height: 1.6; color: #a8c7fa;">
+              <strong>📌 模拟数据声明 (Notice)</strong>：<br />
+              本看板展示的所有核心指标（包括用户规模、Token 消耗量、转化留存模型、分时趋势及场景分布等），均为面向 <strong>Wenty-test</strong> 平台进行<strong>内部测试、功能演练与可视化大屏适配</strong>生成的<strong>模拟仿真数据集（Simulated Test Data）</strong>，不包含任何外部生产隐私与机密数据。
+            </div>
+
+            <details open>
+              <summary>时间范围与分时过滤</summary>
+              <p>右上角时间段控制器可联动过滤趋势、画像、渠道、留存、漏斗与模型消耗等分时指标；「累计部署实例数」为平台有史以来的全局基线累计值，不受所选起始日期的约束。</p>
+              <ul>
+                <li>数据来源：<code>simulation/datasets/opsDailyQuality_simulated.sql</code></li>
+                <li>基线指标：<code>simulation/datasets/lifetimeDeployTotal_simulated.sql</code></li>
+              </ul>
+            </details>
+            <details>
+              <summary>运营总览与核心指标</summary>
+              <p>实例部署为所选时间段内完成有效 Wenty 实例部署的用户数；新用户为注册日期等于首次使用日期的用户；老用户为注册日期早于使用日期的活跃老用户；日均 Token 为时间段内消耗总 Token 除以有效天数。</p>
+              <ul>
+                <li>累计部署实例数：全周期累计有效实例部署总和，截至所选结束日期。</li>
+                <li>新老用户结构：按每日用户身份标签汇总聚类。</li>
+                <li>数据来源：<code>simulation/datasets/opsDailyQuality_simulated.sql</code></li>
+              </ul>
+            </details>
+            <details>
+              <summary>运营趋势复合图</summary>
+              <p>蓝色折线展示每日新增实例部署趋势；蓝紫堆积柱展示每日新老用户活跃结构；青色折线展示每日总 Token 吞吐量（右轴单位：亿 Token）。</p>
+              <ul>
+                <li>图表加载：仅在首次进入或应用新筛选日期时播放动效；Hover 交互仅展示即时 Tooltip 与高亮。</li>
+                <li>数据来源：<code>simulation/datasets/tokenDaily_simulated.sql</code></li>
+              </ul>
+            </details>
+            <details>
+              <summary>付费转化与健康漏斗</summary>
+              <p>以付费用户基线为基准，依次展示「已部署实例」、「已首次使用」、「次日留存」、「深度对话用户」四个转化阶段。</p>
+              <ul>
+                <li>已部署实例：付费用户中完成有效 Wenty 实例部署的规模。</li>
+                <li>已首次使用：部署后发生首次有效交互的人数。</li>
+                <li>次日留存：第 2 个自然日依然产生交互活跃的用户。</li>
+                <li>深度对话用户：在统计周期内累计会话 Session 数达到 4 个及以上的核心高价值用户。</li>
+                <li>数据来源：<code>simulation/datasets/opsActivationFunnel_simulated.sql</code></li>
+              </ul>
+            </details>
+            <details>
+              <summary>渠道来源与留存流向 (桑基图)</summary>
+              <p>桑基图直观呈现从各入口渠道（直接流量、精准推广、SEO、生态协同等）到部署用户、当日活跃、3天留存及待激活流向。</p>
+              <ul>
+                <li>流失用户：当日使用后未进入后续 3 天活跃留存的用户群体。</li>
+                <li>待激活：已完成实例部署但未在当日产生深入调用的用户。</li>
+                <li>数据来源：<code>simulation/datasets/channelFunnel_simulated.sql</code></li>
+              </ul>
+            </details>
+            <details>
+              <summary>用户画像与分层聚类</summary>
+              <p>画像板块按新老结构、活跃天数跨度、使用频次、Token 消耗分层、会话深度与核心业务场景进行多维聚合。</p>
+              <ul>
+                <li>高消耗用户池：按用户 Token 消耗区间（如百万级、千万级等）梯度分层。</li>
+                <li>场景排行：按不同 AI 场景分类（工程构建、分析决策、内容创作等）的消息总量排序。</li>
+                <li>数据来源：<code>simulation/datasets/opsUserQualitySegments_simulated.sql</code></li>
+              </ul>
+            </details>
+            <details>
+              <summary>模型 Token 消耗分布 (Treemap)</summary>
+              <p>按大语言模型维度汇总 Token 消耗量，面积大小代表 Token 贡献比重（单位：亿 Token）；支持悬停交互查看模型全称与精准占比。</p>
+              <ul>
+                <li>主力模型：Token 消耗排名前列的核心基座大模型（如 Wenty-Core-v5, DeepSeek-V4, Spark-X2 等）。</li>
+                <li>长尾模型：长尾轻量化推理与垂类微调模型。</li>
+                <li>数据来源：<code>simulation/datasets/modelUsage_simulated.sql</code></li>
+              </ul>
+            </details>
+            <details>
+              <summary>Wenty-test 智能问数</summary>
+              <p>本功能支持针对当前大屏指标快照进行自然语言提问与即时分析。在纯前端静态部署环境下，系统将自动基于本地缓存快照与内置语义规则引擎进行秒级分析与回答。</p>
+              <ul>
+                <li>数据来源：当前页面已加载的模拟指标快照。</li>
+                <li>本地模式：支持关于模型消耗、留存转化、用户画像及总体规模的即时语义匹配。</li>
+              </ul>
+            </details>
+          </div>
+        </section>
+      </div>
+
+      <div id="weeklyReportOverlay" class="method-overlay" hidden>
+        <section class="method-panel report-panel" role="dialog" aria-modal="true" aria-labelledby="weeklyReportTitle">
+          <div class="method-panel-head">
+            <div>
+              <span>基于模拟数据生成周报</span>
+              <strong id="weeklyReportTitle">Wenty-test 模拟周报</strong>
+            </div>
+            <button id="weeklyReportClose" type="button" aria-label="关闭周报">×</button>
+          </div>
+          <div class="method-panel-body report-panel-body">
+            <article class="weekly-report-card">
+              <div class="weekly-report-toolbar">
+                <span id="weeklyReportRange">准备生成</span>
+                <button id="weeklyReportCopy" class="report-copy-button" type="button">复制</button>
+              </div>
+              <pre id="weeklyReportContent">点击“周报”后，将自动根据当前模拟数据集计算生成上周运营数据。</pre>
+            </article>
+          </div>
+        </section>
+      </div>
+
+      <section id="versionStage" class="version-stage" aria-live="polite"></section>
+    </main>
+
+    <script src="./vendor/echarts/echarts.min.js"></script>
+    <script>
+      if (typeof echarts === 'undefined') {
+        document.write('<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"><\/script>');
+      }
+    </script>
+    <script src="./data/dashboard-data-local.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>
