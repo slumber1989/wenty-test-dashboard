@@ -83,3 +83,5 @@ wenty-test-dashboard/
 - **核心逻辑**：原生 ECMAScript 6+（无外部框架捆绑，轻量极致）
 - **界面交互**：原生 HTML5 + CSS3 Flexbox / CSS Grid 弹性自适应布局
 - **字体与自适应**：系统级等宽与无衬线字体，适配 1920x1080 标准大屏及 4K 宽屏显示
+
+<!-- automated test -->
