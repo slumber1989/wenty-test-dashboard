@@ -1073,7 +1073,7 @@ function profileRadarOptions(q) {
     tooltip: {
       ...baseTooltip(),
       formatter: () => rows
-        .map((row) => `${row.name}：${row.display}<br/><span style="color:rgba(204,226,255,.62)">${row.note}</span>`)
+        .map((row) => `${row.name}：${row.display}<br/><span style="color:var(--muted)">${row.note}</span>`)
         .join("<br/>"),
     },
     radar: {
@@ -1710,13 +1710,61 @@ function initAsk(q) {
   });
 }
 
+// Keep chart geometry and series colors; adapt text and tooltip surfaces.
+function withChartTheme(options) {
+  if (document.documentElement.dataset.theme !== "light") return options;
+  const textKeys = new Set(["textStyle", "axisLabel", "axisName", "label", "upperLabel"]);
+  const visit = (value, textContext = false) => {
+    if (!value || typeof value !== "object") return;
+    Object.entries(value).forEach(([key, child]) => {
+      if (textContext && key === "color") value[key] = "#20334f";
+      else if (textContext && key === "textBorderColor") value[key] = "transparent";
+      else if (key === "tooltip") {
+        child.backgroundColor = "rgba(255,255,255,0.97)";
+        child.borderColor = "#c8d9ec";
+        visit(child);
+      } else visit(child, textContext || textKeys.has(key));
+    });
+  };
+  visit(options);
+  // Labels inside the saturated treemap tiles retain their light foreground.
+  (options.series || []).forEach((series) => {
+    if (series.type === "treemap") {
+      series.label = { ...series.label, color: "#ffffff" };
+      (series.data || []).forEach((item) => {
+        if (item.label) item.label.color = "#ffffff";
+      });
+    }
+  });
+  return options;
+}
+
+function initThemeToggle() {
+  const button = document.getElementById("themeToggle");
+  const syncButton = () => {
+    const light = document.documentElement.dataset.theme === "light";
+    button.textContent = light ? "☾ 深色" : "☀ 浅色";
+    button.setAttribute("aria-pressed", String(light));
+    button.title = light ? "切换到深色模式" : "切换到浅色模式";
+  };
+  syncButton();
+  button.addEventListener("click", () => {
+    const theme = document.documentElement.dataset.theme === "light" ? "dark" : "light";
+    document.documentElement.dataset.theme = theme;
+    try { localStorage.setItem("wenty-theme", theme); } catch { /* Storage may be unavailable. */ }
+    syncButton();
+    // Refresh only charts so date filters, questions and open dialogs are preserved.
+    renderCharts(quality(currentRange));
+  });
+}
+
 function renderCharts(q) {
   const animate = animateNextCharts;
   animateNextCharts = false;
   charts.splice(0).forEach((chart) => chart.dispose());
   document.querySelectorAll("[data-chart]").forEach((el) => {
     const chart = chartBase(el);
-    if (chart) chart.setOption(withChartMotion(chartOptions(el.dataset.chart, q), animate), true);
+    if (chart) chart.setOption(withChartMotion(withChartTheme(chartOptions(el.dataset.chart, q)), animate), true);
   });
 }
 
@@ -2309,6 +2357,7 @@ async function boot() {
   captureStickyMetrics(raw, true);
   updateSelectableRange(raw);
   currentRange = normalizeRange(currentRange[0], currentRange[1]);
+  initThemeToggle();
   initMethodPanel();
   initWeeklyReportPanel();
   initPeriodControls();

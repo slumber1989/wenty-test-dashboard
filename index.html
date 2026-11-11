@@ -4,7 +4,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Wenty-test 数据大屏 (内部测试模拟版)</title>
+    <script>
+      // Apply the saved preference before painting to avoid a theme flash.
+      try {
+        const savedTheme = localStorage.getItem("wenty-theme");
+        document.documentElement.dataset.theme = savedTheme === "light" ? "light" : "dark";
+      } catch {
+        document.documentElement.dataset.theme = "dark";
+      }
+    </script>
     <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./themes.css" />
   </head>
   <body>
     <main class="screen-shell">
@@ -14,6 +24,7 @@
           <span id="sourceMode" class="system-code">WENTY-TEST / 模拟测试数据</span>
           <div class="header-meta-actions">
             <strong style="background: rgba(255, 179, 0, 0.16); color: #ffb74d; border: 1px solid rgba(255, 179, 0, 0.4); padding: 2px 8px; border-radius: 4px; font-size: 11px; letter-spacing: 0.5px;">内部模拟数据</strong>
+            <button id="themeToggle" class="method-button theme-toggle" type="button" aria-label="浅色模式" aria-pressed="false">☀ 浅色</button>
             <button id="methodButton" class="method-button" type="button" aria-haspopup="dialog" aria-controls="methodOverlay">口径</button>
             <button id="weeklyReportButton" class="method-button weekly-button" type="button" aria-haspopup="dialog" aria-controls="weeklyReportOverlay">周报</button>
           </div>

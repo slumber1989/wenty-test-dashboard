@@ -1,0 +1,216 @@
+/* Theme overrides: layout and data remain shared with styles.css. */
+html[data-theme="light"] {
+  color-scheme: light;
+  --bg: #eef3fa;
+  --panel: #ffffff;
+  --panel-deep: #f4f7fc;
+  --text: #20334f;
+  --muted: #536982;
+  --dim: #65778d;
+  --line: #cdddeb;
+  --line-hot: #2685bd;
+  --cyan: #007e9e;
+  --blue: #2563cf;
+  --violet: #7054cf;
+  --purple: #6949c7;
+  --pink: #b43cad;
+  --mint: #087f70;
+  --red: #c73865;
+}
+.theme-toggle { white-space: nowrap; }
+.header-meta-actions { gap: 6px; }
+.header-meta-actions .method-button { padding-inline: 7px; }
+button:focus-visible, input:focus-visible, summary:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 3px;
+}
+html[data-theme="light"] .system-code,
+html[data-theme="light"] .header-side strong,
+html[data-theme="light"] .method-button,
+html[data-theme="light"] .method-button:hover,
+html[data-theme="light"] .method-panel-head span,
+html[data-theme="light"] .method-panel-head strong,
+html[data-theme="light"] .method-panel-head button,
+html[data-theme="light"] .method-panel-body summary,
+html[data-theme="light"] .method-panel-body h3,
+html[data-theme="light"] .method-panel-body p,
+html[data-theme="light"] .method-panel-body li,
+html[data-theme="light"] .method-panel-body code,
+html[data-theme="light"] .weekly-report-toolbar span,
+html[data-theme="light"] .report-copy-button,
+html[data-theme="light"] #weeklyReportContent,
+html[data-theme="light"] .title-block h1,
+html[data-theme="light"] .time-block,
+html[data-theme="light"] .time-block strong,
+html[data-theme="light"] .period-picker input,
+html[data-theme="light"] .period-picker button,
+html[data-theme="light"] .version-stage.is-range-loading::after,
+html[data-theme="light"] .panel-title h2,
+html[data-theme="light"] .sankey-terminal span,
+html[data-theme="light"] .sankey-terminal strong,
+html[data-theme="light"] .sankey-terminal-stack > em,
+html[data-theme="light"] .kpi-card strong,
+html[data-theme="light"] .kpi-card em,
+html[data-theme="light"] .core-caption span,
+html[data-theme="light"] .core-caption strong,
+html[data-theme="light"] .core-caption em,
+html[data-theme="light"] .data-node strong,
+html[data-theme="light"] .metric-tile span,
+html[data-theme="light"] .metric-head i,
+html[data-theme="light"] .metric-tile strong,
+html[data-theme="light"] .metric-tile em,
+html[data-theme="light"] .core-relations span,
+html[data-theme="light"] .core-relations strong,
+html[data-theme="light"] .core-overview-simple .core-deploy-total span,
+html[data-theme="light"] .core-overview-simple .core-deploy-total strong,
+html[data-theme="light"] .core-overview-simple .core-deploy-total em,
+html[data-theme="light"] .core-overview-simple .metric-tile em,
+html[data-theme="light"] .core-overview-simple .metric-head span,
+html[data-theme="light"] .profile-metrics span,
+html[data-theme="light"] .profile-metrics strong,
+html[data-theme="light"] .profile-pool-title,
+html[data-theme="light"] .pool-ring strong,
+html[data-theme="light"] .pool-ring span,
+html[data-theme="light"] .pool-sparks span,
+html[data-theme="light"] .pool-sparks strong,
+html[data-theme="light"] .radar-readout-item span,
+html[data-theme="light"] .radar-readout-item strong,
+html[data-theme="light"] .radar-readout-item em,
+html[data-theme="light"] .profile-section-title,
+html[data-theme="light"] .frequency-row,
+html[data-theme="light"] .frequency-row strong,
+html[data-theme="light"] .frequency-orbit,
+html[data-theme="light"] .frequency-orbit strong,
+html[data-theme="light"] .frequency-orbit span,
+html[data-theme="light"] .frequency-orbit em,
+html[data-theme="light"] .consume-row,
+html[data-theme="light"] .consume-row span,
+html[data-theme="light"] .consume-row strong,
+html[data-theme="light"] .consume-row em,
+html[data-theme="light"] .model-treemap-cell > span,
+html[data-theme="light"] .model-list-row span,
+html[data-theme="light"] .model-list-row strong,
+html[data-theme="light"] .consume-tile span,
+html[data-theme="light"] .consume-tile strong,
+html[data-theme="light"] .consume-tile em,
+html[data-theme="light"] .profile-bubble span,
+html[data-theme="light"] .profile-bubble strong,
+html[data-theme="light"] .profile-bar-row,
+html[data-theme="light"] .profile-bar-row strong,
+html[data-theme="light"] .conversation-tile span,
+html[data-theme="light"] .conversation-tile strong,
+html[data-theme="light"] .conversation-tile em,
+html[data-theme="light"] .scene-tile strong,
+html[data-theme="light"] .scene-tile span,
+html[data-theme="light"] .profile-strip,
+html[data-theme="light"] .profile-strip strong,
+html[data-theme="light"] .rank-item,
+html[data-theme="light"] .rank-value,
+html[data-theme="light"] .energy-block strong,
+html[data-theme="light"] .pool-row,
+html[data-theme="light"] .pool-row strong,
+html[data-theme="light"] .pool-row em,
+html[data-theme="light"] .pool-footer span,
+html[data-theme="light"] .pool-footer strong,
+html[data-theme="light"] .advice-list li,
+html[data-theme="light"] .ask-input input,
+html[data-theme="light"] .ask-input button,
+html[data-theme="light"] .ask-chip,
+html[data-theme="light"] .ask-answer,
+html[data-theme="light"] .ask-answer.is-loading,
+html[data-theme="light"] .ask-suggestions span,
+html[data-theme="light"] .ask-suggestions li,
+html[data-theme="light"] .conversion-head em,
+html[data-theme="light"] .conversion-name,
+html[data-theme="light"] .conversion-values b,
+html[data-theme="light"] .conversion-values i {
+  color: var(--text);
+  text-shadow: none;
+}
+
+html[data-theme="light"] .screen-header::before,
+html[data-theme="light"] .method-button,
+html[data-theme="light"] .weekly-button,
+html[data-theme="light"] .method-overlay,
+html[data-theme="light"] .method-panel,
+html[data-theme="light"] .method-panel-head,
+html[data-theme="light"] .method-panel-head button,
+html[data-theme="light"] .method-panel-body article,
+html[data-theme="light"] .method-panel-body details,
+html[data-theme="light"] .method-panel-body summary::before,
+html[data-theme="light"] .report-copy-button,
+html[data-theme="light"] .period-picker input,
+html[data-theme="light"] .period-picker button,
+html[data-theme="light"] .version-stage.is-range-loading::after,
+html[data-theme="light"] .tech-panel,
+html[data-theme="light"] .panel-title,
+html[data-theme="light"] .panel-icon,
+html[data-theme="light"] .sankey-terminal,
+html[data-theme="light"] .kpi-card,
+html[data-theme="light"] .data-node,
+html[data-theme="light"] .metric-tile,
+html[data-theme="light"] .core-relations span,
+html[data-theme="light"] .core-overview-simple .core-mark,
+html[data-theme="light"] .core-mini-star,
+html[data-theme="light"] .core-overview-simple .metric-tile,
+html[data-theme="light"] .core-overview-simple .metric-tile em,
+html[data-theme="light"] .profile-metrics span,
+html[data-theme="light"] .profile-pool,
+html[data-theme="light"] .pool-ring,
+html[data-theme="light"] .pool-sparks span,
+html[data-theme="light"] .profile-radar-main,
+html[data-theme="light"] .radar-readout-item,
+html[data-theme="light"] .profile-card,
+html[data-theme="light"] .frequency-orbit i,
+html[data-theme="light"] .model-map,
+html[data-theme="light"] .model-treemap-cell,
+html[data-theme="light"] .model-treemap-tail,
+html[data-theme="light"] .model-list-row,
+html[data-theme="light"] .consume-tile,
+html[data-theme="light"] .consume-tile i,
+html[data-theme="light"] .profile-bubble,
+html[data-theme="light"] .profile-bubble i,
+html[data-theme="light"] .profile-bubble:nth-child(2) i,
+html[data-theme="light"] .profile-bubble:nth-child(3) i,
+html[data-theme="light"] .profile-bubble:nth-child(4) i,
+html[data-theme="light"] .profile-bubble:nth-child(5) i,
+html[data-theme="light"] .conversation-tile,
+html[data-theme="light"] .conversation-tile::after,
+html[data-theme="light"] .scene-tile,
+html[data-theme="light"] .energy-block,
+html[data-theme="light"] .pool-footer span,
+html[data-theme="light"] .ask-input,
+html[data-theme="light"] .ask-prefix,
+html[data-theme="light"] .ask-input button,
+html[data-theme="light"] .ask-chip,
+html[data-theme="light"] .ask-suggestions,
+html[data-theme="light"] .slot-ask .ask-box-simple .ask-answer,
+html[data-theme="light"] .conversion-step,
+html[data-theme="light"] .conversion-head span {
+  background: linear-gradient(145deg, #ffffff, #edf3fb);
+  border-color: #ccdceb;
+  box-shadow: 0 2px 10px rgba(36, 67, 109, 0.06);
+}
+
+html[data-theme="light"] body {
+  background: radial-gradient(ellipse at 50% 0%, #dceafd, transparent 65%), #eef3fa;
+}
+html[data-theme="light"] .starfield,
+html[data-theme="light"] .screen-shell::before,
+html[data-theme="light"] .screen-shell::after { opacity: 0.12; }
+html[data-theme="light"] .tech-panel { border-color: #c8d9ec; box-shadow: 0 4px 18px #2343690d; }
+html[data-theme="light"] .panel-title { background: linear-gradient(90deg, #e4eefc, #f8fbff); }
+html[data-theme="light"] .method-overlay { background: rgba(38, 57, 85, 0.32); }
+html[data-theme="light"] .method-panel { background: #f8fbff; box-shadow: 0 18px 64px #19355b33; }
+html[data-theme="light"] .header-side strong[style] { color: #8a5400 !important; text-shadow: none; }
+html[data-theme="light"] .method-panel-body > div[style] { color: #315980 !important; }
+html[data-theme="light"] input::placeholder { color: #65778d; }
+html[data-theme="light"] button:hover { background: #deebfc; border-color: #6392cd; }
+html[data-theme="light"] .theme-toggle { color: #2458aa; border-color: #93b4df; }
+
+html[data-theme="light"] .conversion-head span { color: var(--blue); }
+html[data-theme="light"] .core-caption span,
+html[data-theme="light"] .metric-tile span,
+html[data-theme="light"] .time-block,
+html[data-theme="light"] .system-code,
+html[data-theme="light"] .conversion-values b { color: var(--muted); }
